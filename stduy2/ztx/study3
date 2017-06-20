@@ -1,0 +1,7 @@
+world: 有周围的参照物
+display: 视野内的挡视线
+body: 晕，
+
+混合的利用
+
+display > world > body

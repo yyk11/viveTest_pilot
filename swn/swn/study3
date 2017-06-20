@@ -1,0 +1,8 @@
+world: 位置固定，人也不动的时候比较好找，人动起来不行
+display: 跟着你走，感觉不自然，转头看不见很奇怪，头一圈比较适合
+body: 比较好，跟着人走，以身体为参照，转头可以学习分布
+
+
+不动： body > world > display
+动： body > display > world
+

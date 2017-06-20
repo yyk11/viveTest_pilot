@@ -1,0 +1,5 @@
+world: 移动了之后不好找
+display: 最难，需要思考
+body: 定位东西使用身体定位的
+
+body > world > display

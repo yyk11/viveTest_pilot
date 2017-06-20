@@ -1,0 +1,54 @@
+C:\Users\Public\Documents\Unity Projects\viveTest\Temp\bin\Debug\Assembly-CSharp-firstpass.dll
+C:\Users\Public\Documents\Unity Projects\viveTest\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
+C:\Users\Public\Documents\Unity Projects\viveTest\Temp\bin\Debug\UnityEditor.dll
+C:\Users\Public\Documents\Unity Projects\viveTest\Temp\bin\Debug\UnityEngine.dll
+C:\Users\Public\Documents\Unity Projects\viveTest\Temp\bin\Debug\UnityEngine.Networking.dll
+C:\Users\Public\Documents\Unity Projects\viveTest\Temp\bin\Debug\UnityEngine.UI.dll
+C:\Users\Public\Documents\Unity Projects\viveTest\Temp\bin\Debug\Mono.Cecil.dll
+C:\Users\Public\Documents\Unity Projects\viveTest\Temp\bin\Debug\Unity.SerializationLogic.dll
+C:\Users\Public\Documents\Unity Projects\viveTest\Temp\bin\Debug\Unity.DataContract.dll
+C:\Users\Public\Documents\Unity Projects\viveTest\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\Users\Public\Documents\Unity Projects\viveTest\Temp\bin\Debug\Unity.UNetWeaver.dll
+C:\Users\Public\Documents\Unity Projects\viveTest\Temp\bin\Debug\Unity.CecilTools.dll
+C:\Users\Public\Documents\Unity Projects\viveTest\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+C:\Users\Public\Documents\Unity Projects\viveTest\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+C:\Users\Public\Documents\Unity Projects\viveTest\Temp\bin\Debug\UnityEngine.xml
+C:\Users\Public\Documents\Unity Projects\viveTest\Temp\bin\Debug\UnityEditor.xml
+C:\Users\Public\Documents\Unity Projects\viveTest\Temp\bin\Debug\UnityEngine.UI.xml
+C:\Users\Public\Documents\Unity Projects\viveTest\Temp\bin\Debug\UnityEngine.Networking.xml
+C:\Users\Public\Documents\Unity Projects\viveTest\obj\Debug\Assembly-CSharp-firstpass.csprojResolveAssemblyReference.cache
+C:\Users\Public\Documents\Unity Projects\viveTest\obj\Debug\Assembly-CSharp-firstpass.dll
+C:\Users\Public\Documents\Unity Projects\viveTest\obj\Debug\Assembly-CSharp-firstpass.pdb
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\Assembly-CSharp-firstpass.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\Mono.Cecil.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEditor.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEngine.Advertisements.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEngine.Analytics.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEngine.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEngine.HoloLens.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEngine.Networking.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEngine.PlaymodeTestsRunner.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEngine.Purchasing.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEngine.UI.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEngine.VR.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\Unity.SerializationLogic.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\Unity.DataContract.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\Unity.UNetWeaver.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\Unity.CecilTools.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEngine.xml
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEditor.xml
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEngine.Advertisements.xml
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEngine.UI.xml
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEngine.Networking.xml
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEngine.PlaymodeTestsRunner.xml
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEngine.Analytics.xml
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEngine.HoloLens.xml
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEngine.Purchasing.xml
+C:\Users\PCG-527\Desktop\viveTest_pilot\Temp\bin\Debug\UnityEngine.VR.xml
+C:\Users\PCG-527\Desktop\viveTest_pilot\obj\Debug\Assembly-CSharp-firstpass.csprojResolveAssemblyReference.cache
+C:\Users\PCG-527\Desktop\viveTest_pilot\obj\Debug\Assembly-CSharp-firstpass.dll
+C:\Users\PCG-527\Desktop\viveTest_pilot\obj\Debug\Assembly-CSharp-firstpass.pdb
