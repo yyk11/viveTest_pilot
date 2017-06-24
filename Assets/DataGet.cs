@@ -138,7 +138,7 @@ public class DataGet : MonoBehaviour {
 	}
 
 
-	public void logData_Study1_Phase2(string foldname, Vector3[] positions_target, Vector3[] positions_result, bool[] visible_result)
+	public void logData_Study1_Phase2(string foldname, Vector3[] positions_target, Vector3[] positions_result, bool[] visible_result, Vector3[] positions_body, Quaternion[] rotations_body, Vector3[] positions_head, Quaternion[] rotations_head, int[] orders_move)
 	{
 		Debug.Log ("log study1 phase2 results");
 		tmpdir = dir + foldname + '/';
@@ -158,6 +158,26 @@ public class DataGet : MonoBehaviour {
 		fstream.Write ("result visibles:\r\n");
 		for (int i = 0; i < positions_result.Length; i++) {
 			fstream.Write (visible_result[i] + "\r\n");
+		}
+		fstream.Write ("body positions:\r\n");
+		for (int i = 0; i < positions_result.Length; i++) {
+			fstream.Write (positions_body [i].x + " " + positions_body [i].y + " " + positions_body [i].z + " " + "\r\n");
+		}
+		fstream.Write ("body rotations:\r\n");
+		for (int i = 0; i < positions_result.Length; i++) {
+			fstream.Write (rotations_body [i].x + " " + rotations_body [i].y + " " + rotations_body [i].z + " " + rotations_body[i].w + " \r\n");
+		}
+		fstream.Write ("head positions:\r\n");
+		for (int i = 0; i < positions_result.Length; i++) {
+			fstream.Write (positions_head [i].x + " " + positions_head [i].y + " " + positions_head [i].z + " " + "\r\n");
+		}
+		fstream.Write ("head rotations:\r\n");
+		for (int i = 0; i < positions_result.Length; i++) {
+			fstream.Write (rotations_head [i].x + " " + rotations_head [i].y + " " + rotations_head [i].z + " " + rotations_head[i].w + " \r\n");
+		}
+		fstream.Write ("move orders:\r\n");
+		for (int i = 0; i < positions_result.Length; i++) {
+			fstream.Write (orders_move[i].ToString() + " \r\n");
 		}
 		fstream.Close ();
 	}

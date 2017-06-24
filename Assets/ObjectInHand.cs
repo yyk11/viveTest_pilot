@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectInHand : MonoBehaviour {
 
 	private SteamVR_TrackedObject hand;
-	private SteamVR_Controller.Device controller;
+	public SteamVR_Controller.Device controller;
 	public GameObject collidingObj;
 	public GameObject objInHand;
 	public control con;

@@ -245,7 +245,38 @@ public class control : MonoBehaviour {
 		}
 	}*/
 
+	/*
+	private void Initiate_Lines()
+	{
 
+		if (balls_grid != null) {
+			for (int i = 0; i < balls_grid.Length; i++)
+				Destroy (balls_grid [i]);
+		}
+		GameObject flag = GameObject.Find ("Flag");
+		flag.transform.position = head.transform.TransformPoint (new Vector3 (0, -1, 10));
+		flag.transform.rotation = head.transform.rotation;
+		flag.transform.Rotate (Vector3.up * 90, Space.Self);
+		balls_grid = new GameObject[num_amount_one];
+		for (int i = 0; i < num_z_level; i++) {
+			for (int j = 0; j < num_d_level; j++) {
+
+				for (int k = 0; k < num_theta_level; k++) {
+					int index_space = i * num_d_level * num_theta_level + j * num_theta_level + k;
+					GameObject ball_transparent = GameObject.Find ("Example");
+					balls_grid[index_space] = GameObject.Instantiate(ball_transparent,head.transform.TransformPoint(positions_relative_one [index_space]+new Vector3(0,-0.15f,-0.1f)), ball_transparent.transform.rotation);
+					//balls_grid[index_space] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+					//balls_grid [index_space].AddComponent<Material> ();
+					balls_grid[index_space].transform.localScale = scale_balls * 0.5f;
+					balls_grid [index_space].name = index_space.ToString ();
+					//balls_grid [index_space].GetComponent<Material>().color = new Color (1, 1, 1,0);
+
+					//balls_grid[index_space].transform.position = positions_world_one [index_space]+new Vector3(0,-0.15f,-0.1f);
+				}
+			}
+		}
+	}
+	*/
 
 
 	// in rectangular region, discarded
@@ -503,33 +534,16 @@ public class control : MonoBehaviour {
 	}
 
 	 //study 2 pointing in the space
-	private float[] zs;
-	private float[] thetas;
-	private float[] fis;
-	private float[] ds;
-	private int num_z_level = 12;
-	private int num_d_level = 1;
-	private int num_theta_level = 36;
-	private int num_move_level = 7;
-	private string[] text_vertical = { "中","上","下","上","下" };
-	private string[] text_horizon = { "前","右前","右前","右","右后","右后","后","左后","左后","左","左前","左前" };
+
+
+
 	private Vector3 position_center_space;
 	private Vector3[] positions_space; // the positions relative to the head, keep unchanged during the process
 	private Vector3[] positions_ball_world_space; // the positions in the world reference
 	private Vector3[] positions_result_space;
 	private GameObject ball_current;
 	private GameObject[] balls_space;
-	private float distance_high = 0.7f;
-	private float distance_low = -0.7f;
-	private float distance_near = 0.55f;
-	private float distance_far = 0.65f;
-	private float distance_move = 0.5f;
-	private float theta_least = - Mathf.PI;
-	private float theta_most = Mathf.PI;
-	private float theta_highest = Mathf.PI/12*5;
-	private float theta_lowest = -Mathf.PI/3;
-	private float theta_move_least = -Mathf.PI/2;
-	private float theta_move_most = Mathf.PI/2;
+
 	private float offset_y = 0.1f;
 	private string[] name_prefab_space = {"throwingknife14_red","potion04_pink","axe1h13_grey","throwingaxe01_black","dagger14_green","dagger25_green","shield04_orange","dagger02_grey","dagger10_grey","dagger02_black","dagger15_yellow","throwingknife16_black","fork02_silver","saw02_gold","sword2h10_purple","throwingstar03_grey","sword2h15_purple","shovel05_silver","throwingknife15_yellow","throwingknife08_blue","wand02_yellow","throwingaxe16_yellow","dagger19_grey","dagger27_red","sword1h19_blue","hammer01_bronze","throwingknife01_pink","throwingaxe06_pink","sword1h03_green","shield24_blue","throwingstar16_grey","axe1h11_green","axe03_green","throwingknife13_grey","tong01_blue","bar01_silver","dagger25_red","knife01_blue","shovel05_iron","sword2h17_grey","dagger15_red","shield21_blue","key05_bronze","throwingknife12_yellow","throwingstar07_blue","sword2h10_orange","throwingknife03_blue","coin02_silver","blower01_iron","dagger06_red","dagger22_green","shovel01_silver","throwingstar15_blue","dagger23_green","throwingaxe03_white","shield14_yellow","hammer03_gold","book05_purple","hammer01_green","sword2h05_red","axe1h05_yellow","shield08_blue","axe1h02_green","ore02_green","seeds02_grey","sword2h11_black","key04_green","throwingaxe11_red","throwingstar05_orange","throwingknife16_grey","wand01_red","dagger13_green","throwingstar06_green","shield19_red","sword1h21_yellow","shield16_grey","gem05_green","axe2h11_beige","saw02_bronze","dagger22_blue","pickaxe03_bronze","sword1h02_green","sword1h21_white","dagger25_grey","dagger01_green","sword2h12_orange","sword1h13_grey","shield18_black","throwingknife07_blue","hook01_blue","axe02_silver","hammer02_bronze","throwingknife01_orange","shield07_blue","dagger26_yellow","thread03_green","shield09_yellow","sword2h01_green","sword1h13_yellow","dagger16_blue","shield19_yellow","dagger10_red","sword1h02_yellow","gem05_white","axe2h16_beige","pickaxe01_bronze","shield05_brown","bucket01_blue","throwingaxe11_brown","throwingknife13_green","sword1h09_red","sword1h12_red","plate01_iron","sword2h10_yellow","orb03_purple","throwingknife03_yellow","shovel02_silver","throwingstar08_red","potion03_red","sword1h11_blue","axe1h14_brown","sword1h03_grey","pickaxe02_gold","pickaxe01_gold","nails01_green","orb01_red","throwingstar02_green","throwingaxe01_green","axe1h10_yellow","ore01_silver","dagger01_black","sword1h06_red","dynamite02_red","dagger18_yellow","gem03_pink","axe01_bronze","gem05_pink","bar02_iron","sword1h11_green","wand05_red","axe1h07_purple","axe2h02_yellow","axe2h03_green","ink01_blue","tong02_bronze","orb02_yellow","sword2h08_blue","gem06_yellow","potion03_purple","axe04_blue","sword2h14_blue","bar01_bronze","shield12_grey","axe03_iron","coin03_silver","saw01_iron","sword1h20_purple","book02_orange","axe1h15_grey","throwingstar02_blue","dagger22_grey","fishingpole01_gold","throwingaxe04_yellow","throwingstar13_blue","shield08_brown","dagger23_red","dagger09_blue","blower01_wood","gem05_yellow","wood01","throwingknife01_green","shovel03_green","throwingaxe11_black","throwingstar07_red","sword2h19_green","sword1h04_blue","dynamite02_black","orb03_green","bar02_gold","bar02_blue"};
 	private Quaternion rotation_old_space;
@@ -540,7 +554,7 @@ public class control : MonoBehaviour {
 	private Vector3[] positions_visual;
 	private GameObject ball_reference;
 	private GameObject[] balls_grid;
-	private Vector3[] positions_move;
+
 	private int num_move;
 
 
@@ -549,7 +563,6 @@ public class control : MonoBehaviour {
 		ball_old = new GameObject[2];
 		touch_and_see = false;
 		rotation_old_space = head.transform.rotation;
-		position_show = head.transform.TransformPoint (positions_reset_relative [0]);
 		positions_visual = new Vector3[2];
 		positions_visual [0] =  new Vector3 (0.2f, 0, 0.5f);
 		positions_visual [1] = new Vector3 (-0.2f, 0, 0.5f);
@@ -800,12 +813,18 @@ public class control : MonoBehaviour {
 	//study 1
 	private GameObject ball_target;
 	private GameObject ball_reset;
+	private GameObject ball_check;
 	private Vector3 position_show;
 	private int num_amount_one; // amount of tasks in study 1
 	private int num_now_one = 0; // the number of trials completed, increase once triggerred, order_target[num_now_one]is the index of the target position
 	private Vector3[] positions_world_one;
 	private Vector3[] positions_relative_one;
 	private Vector3[] positions_result;
+	private int[] orders_move_targets;
+	private Vector3[] positions_body;
+	private Quaternion[] rotations_body;
+	private Vector3[] positions_head;
+	private Quaternion[] rotations_head;
 	private Vector3[] positions_correct;
 	private bool[] visible_result;
 	private int[] order_target;
@@ -813,11 +832,13 @@ public class control : MonoBehaviour {
 	{
 		appear,
 		move,
-		acquire
+		acquire,
+		reset
 	} 
 	private state_study1 appear_move_acquire ; // target appear, move the direction, acquire the target
-	private Vector3[] position_reset;
-	private Vector3[] positions_reset_relative = {new Vector3(0,0,0.5f), new Vector3(0.25f,0,0.433f), new Vector3(0.433f,0,0.25f),new Vector3(0.5f,0,0)};
+	private Vector3 position_reset;
+	private Vector3 position_check;
+	//private Vector3[] positions_reset_relative = {new Vector3(0,0,0.5f), new Vector3(0.25f,0,0.433f), new Vector3(0.433f,0,0.25f),new Vector3(0.5f,0,0)};
 	private int num_reset = 0;
 	private Vector3 position_marker;
 	private GameObject ball_marker;
@@ -826,15 +847,140 @@ public class control : MonoBehaviour {
 	//for get ready
 	private Vector3[] positions_ready_relative = {new Vector3(0.5f, 0, 0), new Vector3(0.65f, 0, 0), new Vector3(0.8f,0,0), new Vector3(0.32f,0,0.383f), new Vector3(0.416f, 0, 0.498f), new Vector3(0.512f,0,0.613f), new Vector3(0.2f, 0.2f,0.2f), new Vector3(0.26f,0.26f,0.26f), new Vector3(0.32f,0.32f,0.32f) };
 	private GameObject[] balls_ready;
+	private float[] zs;
+	private float[] thetas;
+	private float[] fis;
+	private float[] ds;
+	private int num_z_level = 5;
+	private int num_d_level = 1;
+	private int num_theta_level = 12;
+	private int num_move_level = 12;
+	private float distance_high = 0.7f;
+	private float distance_low = -0.7f;
+	private float distance_near = 0.65f;
+	private float distance_far = 0.65f;
+	private float distance_move = 0.5f;
+	private float theta_least = - Mathf.PI;
+	private float theta_most = Mathf.PI;
+	private float theta_highest = Mathf.PI/3;
+	private float theta_lowest = -Mathf.PI/3;
+	private float theta_move_least = -Mathf.PI;
+	private float theta_move_most = Mathf.PI;
+	private Vector3 position_offset = new Vector3 (0.0f, -0.15f, -0.10f);
+	private float[] angles_move;
+	private Vector3 position_first_head;
+	private int[] order_move;
+	private string[] text_horizon_study1 = { "南","西南","西南", "西", "西北", "西北", "北", "东北", "东北", "东", "东南","东南" };
+	private string[] text_vertical_study1 = { "下下", "下", "中", "上", "上上" };
+	private string[] text_move_study1 = { "左左", "左", "右", "右右" };
+	private string[] text_flags = { "北", "东", "南", "西" };
+	private Vector3[] positions_flag = {
+		new Vector3 (0, 0, -50),
+		new Vector3 (-25, 0, -43.3f),
+		new Vector3 (-43.3f, 0, -25),
+		new Vector3 (-50, 0, 0),
+		new Vector3 (-43.3f, 0, 25),
+		new Vector3 (-25, 0, 43.3f),
+		new Vector3 (0, 0, 50),
+		new Vector3 (25, 0, 43.3f),
+		new Vector3 (43.3f, 0, 25),
+		new Vector3 (50, 0, 0),
+		new Vector3 (43.3f, 0, -25),
+		new Vector3 (25, 0, -43.3f),
 
+
+	};
+	private Color[] colors_flag = { new Color(0,0,1), new Color(0.5f,0,0.866f), new Color(0.866f,0,0.5f), new Color(1,0,0), new Color(0.866f,0.5f,0), new Color(0.5f,0.866f,0),new Color(0,1,0), new Color(0.5f,1,0.866f), new Color(0.866f,1,0.5f),new Color(1,1,0), new Color(1,0.866f,0.5f), new Color(1,0.5f,0.866f), };
+	private int[] index_check;
+	private int num_check = 10;
+	GameObject controller_left;
+	bool[] have_index;
+	bool timer_on = false;
+	int timer_tick_count;
+	int timer_tick_amount;
+	
+	private void Initiate_lines()
+	{
+		line = gameObject.AddComponent<LineRenderer> ();
+		GameObject plane = GameObject.Find ("Plane");
+		Vector3 start_line = cam.transform.position + position_offset;
+		Vector3 end_line = new Vector3 ();
+		start_line.y = plane.transform.position.y+0.01f;
+		start_line += Vector3.back * 50;
+		//line.material = new Material (Shader.Find ("Particles/Additive"));
+		//line.startColor = Color.blue;
+		//line.endColor = Color.blue;
+		line.material.SetColor ("_TintColor",new Color(1,0,0,1));
+		//line.SetColors(Color.black, Color.black);
+		line.startWidth = 0.1f;
+		line.endWidth = 0.1f;
+		line.SetPosition (0, start_line);
+		line.SetPosition (1, start_line + Vector3.forward*100);
+		line = GameObject.Find ("Line").AddComponent<LineRenderer> ();
+		start_line.y = plane.transform.position.y+0.01f;
+		start_line += Vector3.left * 50 - Vector3.back*50;
+		line.material.SetColor ("_TintColor",new Color(0,1,0,1));
+		line.startWidth = 0.1f;
+		line.endWidth = 0.1f;
+		line.SetPosition (0, start_line);
+		line.SetPosition (1, start_line + Vector3.right*100);
+
+		GameObject lg = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+		lg.transform.localScale = scale_balls * 0.001f;
+		line = lg.AddComponent<LineRenderer> ();
+
+		start_line.y = plane.transform.position.y+0.01f;
+		start_line += Vector3.back*4 - Vector3.left*46;
+		end_line = start_line + Vector3.forward * 8;
+		line.startWidth = 0.1f;
+		line.endWidth = 0.1f;
+		line.SetPosition (0, start_line);
+		line.SetPosition (1, end_line);
+		lg = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+		lg.transform.localScale = scale_balls * 0.001f;
+		line = lg.AddComponent<LineRenderer> ();
+
+		start_line.y = plane.transform.position.y+0.01f;
+		start_line = end_line;
+		end_line += Vector3.right*8;
+		line.startWidth = 0.1f;
+		line.endWidth = 0.1f;
+		line.SetPosition (0, start_line);
+		line.SetPosition (1, end_line);
+		lg = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+		lg.transform.localScale = scale_balls * 0.001f;
+		line = lg.AddComponent<LineRenderer> ();
+
+		start_line.y = plane.transform.position.y+0.01f;
+		start_line = end_line;
+		end_line += Vector3.back*8;
+		line.startWidth = 0.1f;
+		line.endWidth = 0.1f;
+		line.SetPosition (0, start_line);
+		line.SetPosition (1, end_line);
+		lg = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+		lg.transform.localScale = scale_balls * 0.001f;
+		line = lg.AddComponent<LineRenderer> ();
+
+		start_line.y = plane.transform.position.y+0.01f;
+		start_line = end_line;
+		end_line += Vector3.left*8;
+		line.startWidth = 0.1f;
+		line.endWidth = 0.1f;
+		line.SetPosition (0, start_line);
+		line.SetPosition (1, end_line);
+
+	}
 	private void Show_Text(){
 		
 		if (appear_move_acquire == state_study1.acquire)
 			aim.text = "G";
-		else if(appear_move_acquire == state_study1.appear)
+		else if (appear_move_acquire == state_study1.appear)
 			aim.text = "A";
-		else
+		else if (appear_move_acquire == state_study1.move)
 			aim.text = "M";
+		else
+			aim.text = "C";
 	}
 
 	private void Destroy_Study1Phase2()
@@ -860,7 +1006,7 @@ public class control : MonoBehaviour {
 		positions_relative_one = null;
 		positions_result = null;
 		positions_correct = null;
-		positions_move = null;
+		angles_move = null;
 		order_target = null;
 		visible_result = null;
 		
@@ -869,22 +1015,7 @@ public class control : MonoBehaviour {
 	private float distance_side = 10f;
 	private GameObject[] plane_angles;
 	private float height_plane = 3;
-	private float length_grid = 0.2f;
-	private const float length_grid_old = 0.2f;
-	private int num_edge_grid = 5;
-	private Vector3 position_grid;
-	private Vector3 position_zero;
-	private int horizon_rotate_level = 12;
-	private int vertical_rotate_level = 5;
-	private float vertical_low = -Mathf.PI / 3;
-	private float vertical_high = Mathf.PI/3;
-	private float[] horizon_angles;
-	private float[] vertical_angles;
-	private int num_rotate;
-	private Vector3[] position_first;
-	private float y_offset;
-	private float z_offset;
-	private float x_offset;
+
 	private void Debug_Seen()
 	{
 		Camera cam = head.GetComponent<Camera> ();
@@ -910,7 +1041,10 @@ public class control : MonoBehaviour {
 	}
 	private void Initiate_Balls() // target, reset, marker, reference
 	{
-		
+		controller_left = GameObject.Find ("Controller (left)");
+		SteamVR_Controller.Device controller = controller_left.GetComponent<ObjectInHand>().controller;
+		if(controller.index != 3)
+			controller_left = GameObject.Find ("Controller (right)");
 		position_marker = head.transform.position;
 		position_marker.y = 0.5f;
 		ball_marker = GameObject.CreatePrimitive (PrimitiveType.Cube);
@@ -924,65 +1058,49 @@ public class control : MonoBehaviour {
 		ball_target.transform.localScale = scale_balls*0.3f;
 		ball_target.AddComponent<Rigidbody> ();
 		ball_target.GetComponent<Rigidbody> ().useGravity = false;
-		ball_target.GetComponent<Renderer> ().material.color = Color.red;
-		ball_reset = GameObject.CreatePrimitive (PrimitiveType.Sphere);
-		ball_reset.transform.localScale = scale_balls;
+		ball_target.GetComponent<Renderer> ().material.color = Color.black;
+		ball_target.name = "Ball_Target";
+
+		ball_reset = GameObject.CreatePrimitive (PrimitiveType.Cube);
+		ball_reset.transform.localScale = scale_balls * 0.4f;
 		ball_reset.AddComponent<Rigidbody> ();
 		ball_reset.GetComponent<Rigidbody> ().useGravity = false;
-		ball_reset.GetComponent<Renderer> ().material.color = Color.green;
+		ball_reset.GetComponent<Renderer> ().material.color = Color.gray;
+		ball_reset.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
 		ball_reset.name = "Ball_Reset";
-		ball_reset.transform.position = position_show;
+		ball_reset.transform.position = position_reset;
+		ball_check = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+		ball_check.transform.localScale = scale_balls * 0.01f;
+		ball_check.AddComponent<Rigidbody> ();
+		ball_check.GetComponent<Rigidbody> ().useGravity = false;
+		ball_check.GetComponent<Renderer> ().material.color = Color.gray;
+		ball_check.name = "Ball_Check";
+		ball_check.transform.position = position_check;
+		ball_check.transform.LookAt (position_first_head);
+		ball_reset.transform.LookAt (position_first_head);
+		ball_reset.transform.SetParent (ball_check.transform);
+		for (int i = 0; i < positions_flag.Length; i++) {
+			GameObject ball_flag = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+			ball_flag.GetComponent<Renderer> ().material.color = colors_flag [i];
+			ball_flag.transform.position = cam.transform.position + position_offset + positions_flag [i];
+			GameObject text3d = new GameObject ();
+			text3d.AddComponent <TextMesh>();
+			text3d.GetComponent<TextMesh> ().text = text_horizon_study1 [i];
+			text3d.GetComponent<TextMesh> ().color = Color.black;
+			text3d.GetComponent<TextMesh> ().font = canvas.font;
+			text3d.GetComponent<TextMesh> ().characterSize = 0.2f;
+			text3d.transform.position = cam.transform.position + position_offset + positions_flag[i]/10;
+			text3d.transform.LookAt (ball_flag.transform.position);
+		}
 	}
 
 
 
 
-	private void Initiate_Lines()
-	{
-		
-		if (balls_grid != null) {
-			for (int i = 0; i < balls_grid.Length; i++)
-				Destroy (balls_grid [i]);
-		}
-		GameObject flag = GameObject.Find ("Flag");
-		flag.transform.position = head.transform.TransformPoint (new Vector3 (0, -1, 10));
-		flag.transform.rotation = head.transform.rotation;
-		flag.transform.Rotate (Vector3.up * 90, Space.Self);
-		balls_grid = new GameObject[num_amount_one];
-		for (int i = 0; i < num_z_level; i++) {
-			for (int j = 0; j < num_d_level; j++) {
-
-				for (int k = 0; k < num_theta_level; k++) {
-					int index_space = i * num_d_level * num_theta_level + j * num_theta_level + k;
-					GameObject ball_transparent = GameObject.Find ("Example");
-					balls_grid[index_space] = GameObject.Instantiate(ball_transparent,head.transform.TransformPoint(positions_relative_one [index_space]+new Vector3(0,-0.15f,-0.1f)), ball_transparent.transform.rotation);
-					//balls_grid[index_space] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-					//balls_grid [index_space].AddComponent<Material> ();
-					balls_grid[index_space].transform.localScale = scale_balls * 0.5f;
-					balls_grid [index_space].name = index_space.ToString ();
-					//balls_grid [index_space].GetComponent<Material>().color = new Color (1, 1, 1,0);
-
-					//balls_grid[index_space].transform.position = positions_world_one [index_space]+new Vector3(0,-0.15f,-0.1f);
-				}
-			}
-		}
-		/*
-		for (int i = 0; i < num_z_level; i++) {
-			for (int k = 0; k < num_theta_level; k++) {
-				int index_space = i * num_d_level * num_theta_level + k;
-				GameObject line_new = new GameObject ();
-				LineRenderer linere = line_new.AddComponent<LineRenderer> ();
-				linere.material = new Material (Shader.Find ("Particles/Additive"));
-				linere.widthMultiplier = 0.002f;
-				linere.numPositions = 2;
-				linere.SetPosition (0, positions_world_one [index_space]+new Vector3(0,-0.15f,-0.1f));
-				linere.SetPosition (1, positions_world_one [index_space + num_theta_level]+new Vector3(0,-0.15f,-0.1f));
-			}
-		}*/
-	}
 
 	private  void Initiate_Positions()
 	{
+		position_first_head = cam.transform.position+position_offset;
 		zs = new float[num_z_level];
 		fis = new float[num_z_level];
 		thetas = new float[num_theta_level];
@@ -991,15 +1109,21 @@ public class control : MonoBehaviour {
 
 		positions_world_one = new Vector3[num_amount_one];
 		positions_relative_one = new Vector3[num_amount_one];
-		positions_correct = new Vector3[num_amount_one * num_move_level];
+	    positions_correct = new Vector3[num_amount_one * num_move_level];
+		orders_move_targets = new int[num_amount_one * num_move_level];
 		positions_result = new Vector3[num_amount_one*num_move_level];
+		positions_body = new Vector3[num_amount_one*num_move_level*2];
+		rotations_body = new Quaternion[num_amount_one * num_move_level*2];
+		positions_head = new Vector3[num_amount_one*num_move_level*2];
+		rotations_head = new Quaternion[num_amount_one * num_move_level*2];
 		order_target = new int[num_amount_one];
 		visible_result = new bool[num_amount_one * num_move_level];
 
 
+
 		for (int i = 0; i < num_z_level; i++) {
 			zs [i] = distance_low + (distance_high - distance_low) * i / num_z_level;
-			fis [i] = theta_lowest + (theta_highest - theta_lowest) * i / num_z_level;
+			fis [i] = theta_lowest + (theta_highest - theta_lowest) * i / (num_z_level-1);
 		}
 
 		for (int i = 0; i < num_d_level; i++) {
@@ -1007,8 +1131,10 @@ public class control : MonoBehaviour {
 		}
 
 		for (int i = 0; i < num_theta_level; i++) {
-			thetas [i] = theta_least + (theta_most - theta_least) * i / num_theta_level;
+			thetas [i] = theta_least + (theta_most - theta_least) * i / (num_theta_level);
+			Debug.Log (thetas [i]);
 		}
+
 		for (int i = 0; i < num_z_level; i++) {
 			for (int j = 0; j < num_d_level; j++) {
 				for (int k = 0; k < num_theta_level; k++) {
@@ -1018,15 +1144,24 @@ public class control : MonoBehaviour {
 					position_tmp.y = ds [j] * Mathf.Sin(fis[i]);
 					position_tmp.z = ds [j] * Mathf.Cos(fis[i])*Mathf.Cos (thetas [k]);
 
-					positions_relative_one [index_space] = position_tmp;
-					positions_world_one [index_space] = head.transform.TransformPoint (position_tmp);
+					positions_relative_one [index_space] = position_tmp+position_offset;
+					//positions_world_one [index_space] = cam.transform.TransformPoint (position_tmp+position_offset);
+					positions_world_one[index_space] = cam.transform.position+ positions_relative_one[index_space];
 					//GameObject ball_temp = GameObject.CreatePrimitive (PrimitiveType.Sphere);
 					//ball_temp.transform.position = positions_world_one [index_space];
-					//ball_temp.transform.localScale = scale_balls * 0.2f;
+					//ball_temp.transform.localScale = scale_balls * 0.05f;
+					//ball_temp.transform.RotateAround (cam.transform.position, Vector3.up, 15f);
+					//positions_world_one [index_space] = ball_temp.transform.position;
+					//positions_relative_one [index_space] = cam.transform.InverseTransformPoint (ball_temp.transform.position);
 					order_target [index_space] = index_space;
 				}
 			}
 		}
+		int index_center = (num_z_level / 2) * num_theta_level + num_theta_level / 2;
+		Vector3 position_reset_relative = positions_relative_one [index_center] + new Vector3 (0,0.15f, 0f);
+		position_reset = cam.transform.position + position_reset_relative;
+		Vector3 position_check_relative = positions_relative_one [index_center] + new Vector3 (0,0.15f, 0.1f);
+		position_check = cam.transform.position + position_check_relative;
 		int n = order_target.Length;
 		while (n > 1) {
 			n--;
@@ -1065,17 +1200,25 @@ public class control : MonoBehaviour {
 		haptic_on = false;
 		touch_and_see = false;
 		appear_move_acquire = state_study1.appear;
-
-		position_reset = new Vector3[positions_reset_relative.Length];
-		position_show = head.transform.TransformPoint (new Vector3 (0, 0, 0.5f));
-		for (int i = 0; i < position_reset.Length; i++) {
-			position_reset [i] = head.transform.TransformPoint (positions_reset_relative[i]);
-		}
 		Destroy_Get_Ready ();
 		Destroy_Study1Phase2 ();
 		Show_Text ();
-		Initiate_Balls ();
 		Initiate_Positions ();
+		Initiate_Balls ();
+		Initiate_lines ();
+
+		have_index = new bool[horizon_rotate_level * vertical_rotate_level];
+		for (int i = 0; i < have_index.Length; i++)
+			have_index [i] = false;
+		for(int i = 0;i < num_check;i++)
+		{
+			int new_index = UnityEngine.Random.Range(0,have_index.Length);
+			while(have_index[new_index] == true)
+				new_index = UnityEngine.Random.Range(0,have_index.Length);
+			have_index [new_index] = true;
+			Debug.Log (new_index);
+		}
+
 		dataget.initiate_log ("time", "angle");
 
 		if (reference_now == reference.display) {
@@ -1091,7 +1234,7 @@ public class control : MonoBehaviour {
 		int index_vertical = index_now / num_d_level / num_theta_level;
 		int index_horizon = index_now % num_theta_level;
 		string text_canvas = num_now_one.ToString ();
-		text_canvas += "\n" + text_horizon [index_horizon*2 / num_theta_level] + text_vertical [index_vertical*2/num_z_level];
+		text_canvas += "\n" + text_horizon_study1 [index_horizon] + text_vertical_study1 [index_vertical];
 
 		canvas.text = text_canvas;
 	}
@@ -1118,13 +1261,20 @@ public class control : MonoBehaviour {
 			if (colliding != null && colliding.name == ball_reset.name) {
 				num_move = 0;
 				int index_theta = order_target [num_now_one] % num_theta_level;
-				float value_theta = theta_least + (num_theta_level - index_theta) * (theta_most - theta_least) / num_theta_level;
-				positions_move = new Vector3[num_move_level]; // to be added to parameters
-				for (int i = 0; i < positions_move.Length; i++) {
-					//float theta_move = value_theta + theta_move_least + (num_move_level - i) * (theta_move_most - theta_move_least) / num_move_level ;
-					float theta_move = theta_move_least + (num_move_level - i) * (theta_move_most - theta_move_least) / num_move_level ;
-					positions_move [i] = head.transform.TransformPoint (new Vector3 (distance_move * Mathf.Sin (theta_move), 0, distance_move * Mathf.Cos (theta_move)));
-					Debug.Log (positions_move [i]);
+				Debug.Log (index_theta);
+				Debug.Log (text_horizon_study1 [index_theta]);
+				float value_theta = theta_least + index_theta * (theta_most - theta_least) / (num_theta_level - 1);
+				order_move = new int[num_move_level];
+				for (int i = 0; i < order_move.Length; i++) {
+					order_move [i] = i;
+				}
+				int n = order_move.Length;
+				while (n > 1) {
+					n--;
+					int k = UnityEngine.Random.Range (0, n);
+					int tmp = order_move [k];
+					order_move [k] = order_move [n];
+					order_move [n] = tmp;
 				}
 				Debug.Log (ball_target == null);
 				if (reference_now == reference.display)  // in display reference, we create target relative to head, only rotate, log positions_relative_one, results log inverse
@@ -1132,34 +1282,92 @@ public class control : MonoBehaviour {
 				else
 					ball_target.transform.position = positions_world_one [order_target [num_now_one]];
 				ball_target.transform.SetParent (null);
+				ball_target.transform.localScale = scale_balls * 0.3f;
 				appear_move_acquire = state_study1.move;
 
 
 			}
 		} else if (appear_move_acquire == state_study1.move) {
-			/*
-			ball_reset.transform.position = position_reset [num_reset];
-			if (reference_now == reference.display)
-				ball_target.transform.SetParent (head.transform);
-			*/
-			if (num_move < positions_move.Length) {
-				ball_reset.transform.position = positions_move [num_move];
+			if (num_move < num_move_level) {
+				float y_old = ball_check.transform.position.y;
+				int index_middle = num_z_level / 2 * num_theta_level + order_move [num_move];
+				float x_new = positions_world_one [index_middle].x;
+				float z_new = positions_world_one [index_middle].z+0.1f;
+				ball_check.transform.position = new Vector3 (x_new, y_old, z_new);
+				ball_check.transform.LookAt (position_first_head);
+				ball_target.transform.localScale = scale_balls * 0.0001f;
 			}
+			int move_beta = order_move [num_move]-6;
+			if (move_beta < 0)
+				move_beta += 12;
+			string move_instruction = "";
+			if (move_beta <= 6)
+				move_instruction = "右转" + (move_beta * 30).ToString ();
+			else
+				move_instruction = "左转" + (360 - move_beta * 30).ToString ();
+			canvas.text = move_instruction;
+			//canvas.text = text_horizon_study1 [order_move [num_move]];
+			appear_move_acquire = state_study1.reset;
+		} else if (appear_move_acquire == state_study1.reset) {
+			positions_body [order_target [num_now_one] * num_move_level*2 + num_move*2] = controller_left.transform.position;
+			rotations_body [order_target [num_now_one] * num_move_level*2 + num_move*2] = controller_left.transform.rotation;
+			positions_head [order_target [num_now_one] * num_move_level*2 + num_move*2] = cam.transform.position;
+			rotations_head [order_target [num_now_one] * num_move_level*2 + num_move*2] = cam.transform.rotation;
+			//ball_reset.transform.localScale = scale_balls * 0.2f;
+			//ball_check.transform.localScale = scale_balls * 0.2f;
 			appear_move_acquire = state_study1.acquire;
-		} else {
+			ball_reset.GetComponent<Renderer> ().material.color = Color.gray;
+			if (have_index [num_now_one] == true && num_move == num_move_level / 2) {
+				timer_tick_count = 0;
+				timer_tick_amount = UnityEngine.Random.Range (60, 240);
+				timer_on = true;
+			}
+		}else if (appear_move_acquire == state_study1.acquire){
 			
 			if (reference_now == reference.world) {
 				Vector3 position_v = cam.WorldToViewportPoint (ball_target.transform.position);
 				bool visible_new = false;
 				if (position_v.x > 0 && position_v.x < 1 && position_v.y > 0 && position_v.y < 1 && position_v.z > 0 && position_v.z < 1 && position_v.x + position_v.y + position_v.z >= 1)
 					visible_new = true;
+				orders_move_targets [order_target [num_now_one] * num_move_level + num_move] = order_move [num_move];
 				positions_result [order_target [num_now_one]*num_move_level+num_move] = position_controller;
 				positions_correct [order_target [num_now_one] * num_move_level + num_move] = positions_world_one [order_target [num_now_one]];
+				positions_body [order_target [num_now_one] * num_move_level*2 + num_move*2+1] = controller_left.transform.position;
+				rotations_body [order_target [num_now_one] * num_move_level*2 + num_move*2+1] = controller_left.transform.rotation;
+				positions_head [order_target [num_now_one] * num_move_level*2 + num_move*2+1] = cam.transform.position;
+				rotations_head [order_target [num_now_one] * num_move_level*2 + num_move*2+1] = cam.transform.rotation;
 				visible_result [order_target [num_now_one] * num_move_level + num_move] = visible_new;
-				ball_reset.transform.position = position_reset [0];
+				float y_old = ball_check.transform.position.y;
+				int index_center = num_z_level / 2 * num_theta_level + num_theta_level/2;
+				float x_new = positions_world_one [index_center].x;
+				float z_new = positions_world_one [index_center].z;
+				ball_check.transform.position = new Vector3 (x_new, y_old, z_new);
+				ball_check.transform.LookAt (position_first_head);
+				//ball_check.transform.localScale = scale_balls * 0.4f;
+				//ball_reset.transform.localScale = scale_balls * 0.4f;
 				if (num_move < num_move_level - 1) {
 					num_move++;
-					appear_move_acquire = state_study1.move;
+					float yold = ball_check.transform.position.y;
+					int index_middle = num_z_level / 2 * num_theta_level + order_move [num_move];
+					float xnew = positions_world_one [index_middle].x;
+					float znew = positions_world_one [index_middle].z;
+					ball_check.transform.position = new Vector3 (xnew, yold, znew);
+					ball_check.transform.LookAt (position_first_head);
+					int index_relative = (order_move [num_move] - order_move [num_move - 1] + 6) % num_move_level;
+					if (index_relative < 0)
+						index_relative += 12;
+					//canvas.text = text_horizon_study1 [index_relative];
+					int move_beta = order_move[num_move] - order_move[num_move-1];
+					if (move_beta < 0)
+						move_beta += 12;
+					string move_instruction = "";
+					if (move_beta <= 6)
+						move_instruction = "右转" + (move_beta * 30).ToString ();
+					else
+						move_instruction = "左转" + (360 - move_beta * 30).ToString ();
+					canvas.text = move_instruction;
+					//canvas.text = text_horizon_study1[order_move[num_move]];
+					appear_move_acquire = state_study1.reset;
 					Show_Text ();
 					return;
 				} else {
@@ -1170,33 +1378,21 @@ public class control : MonoBehaviour {
 
 
 				if (num_now_one == positions_world_one.Length) {
-					dataget.logData_Study1_Phase2 ("Study1Phase2", positions_world_one, positions_result, visible_result);
+					dataget.logData_Study1_Phase2 ("Study1Phase2", positions_correct, positions_result, visible_result, positions_body, rotations_body,positions_head,rotations_head,orders_move_targets);
 					state = m_state.Unstart;
 					canvas.text = "Done, Thanks";
 				} else {
 					int index_now = order_target [num_now_one];
-					int index_vertical = index_now / num_d_level / num_theta_level;
+					int index_vertical = index_now / num_theta_level;
 					int index_horizon = index_now % num_theta_level;
 					string text_canvas = num_now_one.ToString ();
-					text_canvas += "\n" + text_horizon [index_horizon *2/ num_theta_level] + text_vertical [index_vertical*2/num_z_level];
+					text_canvas += "\n" + text_horizon_study1 [index_horizon] + text_vertical_study1 [index_vertical];
 
 					canvas.text = text_canvas;
 				}
 			}
 			appear_move_acquire = state_study1.appear;
 			ball_target.transform.position = new Vector3 (100, 100, -100);
-			/*else if (reference_now == reference.display) {
-				if (num_now_one < positions_world_one.Length) {
-					positions_result [order_target [num_now_one]] = head.transform.InverseTransformPoint(position_controller);
-					num_now_one++;
-					ball_reset.transform.position = position_reset [0];
-					canvas.text = num_now_one.ToString ();
-				} else {
-					dataget.logData_Study1_Phase2 ("Study1Phase2", positions_relative_one, positions_result,visible_result);
-					state = m_state.Unstart;
-					canvas.text = "Done, Thanks";
-				}
-			}*/
 
 		}
 		Show_Text ();
@@ -1229,6 +1425,24 @@ public class control : MonoBehaviour {
 		Color.white,
 		Color.yellow
 	};
+	private float length_grid = 0.2f;
+	private const float length_grid_old = 0.2f;
+	private int num_edge_grid = 5;
+	private Vector3 position_grid;
+	private Vector3 position_zero;
+	private int horizon_rotate_level = 12;
+	private int vertical_rotate_level = 5;
+	private float vertical_low = -Mathf.PI / 3;
+	private float vertical_high = Mathf.PI/3;
+	private float[] horizon_angles;
+	private float[] vertical_angles;
+	private int num_rotate;
+	private Vector3[] position_first;
+	private float y_offset;
+	private float z_offset;
+	private float x_offset;
+	private string[] text_vertical = { "中","上","下","上","下" };
+	private string[] text_horizon = { "前","右前","右前","右","右后","右后","后","左后","左后","左","左前","左前" };
 
 	private void CreateNewTarget()
 	{
@@ -1265,7 +1479,7 @@ public class control : MonoBehaviour {
 	{
 		center = num_edge_grid * num_edge_grid / 2;
 		num_rotate = 0;
-		y_offset = -0.25f;
+		y_offset = -0.20f;
 		z_offset = -0.12f;
 		x_offset = 0.04f;
 		horizon_angles = new float[horizon_rotate_level];
@@ -1839,17 +2053,21 @@ public class control : MonoBehaviour {
 			}
 			break;
 		case m_state.Study1_Phase2:
+			if (timer_on == true) {
+				timer_tick_count++;
+				if (timer_tick_count >= timer_tick_amount) {
+					timer_tick_count = 0;
+					timer_tick_amount = -1;
+					timer_on = false;
+					ball_reset.GetComponent<Renderer> ().material.color = Color.magenta;
+				}
+			}
 			if (Input.GetKeyDown (KeyCode.P)) { // redo previous trial
 				if (num_now_one > 0) {
 					appear_move_acquire = state_study1.appear;
 					num_now_one--;
 					ball_target.transform.position = positions_world_one [order_target [num_now_one]];
 					canvas.text = num_now_one.ToString ();
-				}
-			}
-			if (Input.GetKeyDown (KeyCode.A)) {
-				if (num_reset < position_reset.Length - 1) {
-					num_reset++;
 				}
 			}
 			if (Input.GetKeyDown (KeyCode.R)) {
