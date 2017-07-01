@@ -870,7 +870,7 @@ public class control : MonoBehaviour {
 	private float[] angles_move;
 	private Vector3 position_first_head;
 	private int[] order_move;
-	private string[] text_horizon_study1 = { "南","西南","西南", "西", "西北", "西北", "北", "东北", "东北", "东", "东南","东南" };
+	private string[] text_horizon_study1 = { "南","南西","西南", "西", "西北", "北西", "北", "北东", "东北", "东", "东南","南东" };
 	private string[] text_vertical_study1 = { "下下", "下", "中", "上", "上上" };
 	private string[] text_move_study1 = { "左左", "左", "右", "右右" };
 	private string[] text_flags = { "北", "东", "南", "西" };
