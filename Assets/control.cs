@@ -866,27 +866,29 @@ public class control : MonoBehaviour {
 	private float theta_lowest = -Mathf.PI/3;
 	private float theta_move_least = -Mathf.PI;
 	private float theta_move_most = Mathf.PI;
-	private Vector3 position_offset = new Vector3 (0.0f, -0.15f, -0.10f);
+	private Vector3 position_offset = new Vector3 (-0.02f, -0.1f, -0.125f);
+	private Vector3 position_offset_flags = new Vector3 (0.0f, -1.85f, -0.10f);
 	private float[] angles_move;
 	private Vector3 position_first_head;
-	private int[] order_move;
+	private int[] order_move = {6,3,5,2,11,9,7,8,10,0,1,4};
 	private string[] text_horizon_study1 = { "南","南西","西南", "西", "西北", "北西", "北", "北东", "东北", "东", "东南","南东" };
 	private string[] text_vertical_study1 = { "下下", "下", "中", "上", "上上" };
 	private string[] text_move_study1 = { "左左", "左", "右", "右右" };
-	private string[] text_flags = { "北", "东", "南", "西" };
+	private string[] text_flags = {  "南", "西", "北", "东",};
+	private string[] name_flags = { "Tree", "Lamp", "House", "Car" };
 	private Vector3[] positions_flag = {
 		new Vector3 (0, 0, -50),
-		new Vector3 (-25, 0, -43.3f),
-		new Vector3 (-43.3f, 0, -25),
+		//new Vector3 (-25, 0, -43.3f),
+		//new Vector3 (-43.3f, 0, -25),
 		new Vector3 (-50, 0, 0),
-		new Vector3 (-43.3f, 0, 25),
-		new Vector3 (-25, 0, 43.3f),
+		//new Vector3 (-43.3f, 0, 25),
+		//new Vector3 (-25, 0, 43.3f),
 		new Vector3 (0, 0, 50),
-		new Vector3 (25, 0, 43.3f),
-		new Vector3 (43.3f, 0, 25),
+		//new Vector3 (25, 0, 43.3f),
+		//new Vector3 (43.3f, 0, 25),
 		new Vector3 (50, 0, 0),
-		new Vector3 (43.3f, 0, -25),
-		new Vector3 (25, 0, -43.3f),
+		//new Vector3 (43.3f, 0, -25),
+		//new Vector3 (25, 0, -43.3f),
 
 
 	};
@@ -1041,10 +1043,10 @@ public class control : MonoBehaviour {
 	}
 	private void Initiate_Balls() // target, reset, marker, reference
 	{
-		controller_left = GameObject.Find ("Controller (left)");
-		SteamVR_Controller.Device controller = controller_left.GetComponent<ObjectInHand>().controller;
-		if(controller.index != 3)
-			controller_left = GameObject.Find ("Controller (right)");
+		//controller_left = GameObject.Find ("Controller (left)");
+		//SteamVR_Controller.Device controller = controller_left.GetComponent<ObjectInHand>().controller;
+		//if(controller.index != 3)
+		//	controller_left = GameObject.Find ("Controller (right)");
 		position_marker = head.transform.position;
 		position_marker.y = 0.5f;
 		ball_marker = GameObject.CreatePrimitive (PrimitiveType.Cube);
@@ -1080,12 +1082,15 @@ public class control : MonoBehaviour {
 		ball_reset.transform.LookAt (position_first_head);
 		ball_reset.transform.SetParent (ball_check.transform);
 		for (int i = 0; i < positions_flag.Length; i++) {
-			GameObject ball_flag = GameObject.CreatePrimitive (PrimitiveType.Sphere);
-			ball_flag.GetComponent<Renderer> ().material.color = colors_flag [i];
-			ball_flag.transform.position = cam.transform.position + position_offset + positions_flag [i];
+			//GameObject ball_flag = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+			//ball_flag.GetComponent<Renderer> ().material.color = colors_flag [i];
+			GameObject ball_flag = GameObject.Find(name_flags[i]);
+
+			ball_flag.transform.position = cam.transform.position + position_offset_flags + positions_flag [i];
 			GameObject text3d = new GameObject ();
 			text3d.AddComponent <TextMesh>();
-			text3d.GetComponent<TextMesh> ().text = text_horizon_study1 [i];
+			//text3d.GetComponent<TextMesh> ().text = text_horizon_study1 [i];
+			text3d.GetComponent<TextMesh> ().text = text_flags [i];
 			text3d.GetComponent<TextMesh> ().color = Color.black;
 			text3d.GetComponent<TextMesh> ().font = canvas.font;
 			text3d.GetComponent<TextMesh> ().characterSize = 0.2f;
@@ -1147,9 +1152,10 @@ public class control : MonoBehaviour {
 					positions_relative_one [index_space] = position_tmp+position_offset;
 					//positions_world_one [index_space] = cam.transform.TransformPoint (position_tmp+position_offset);
 					positions_world_one[index_space] = cam.transform.position+ positions_relative_one[index_space];
-					//GameObject ball_temp = GameObject.CreatePrimitive (PrimitiveType.Sphere);
-					//ball_temp.transform.position = positions_world_one [index_space];
-					//ball_temp.transform.localScale = scale_balls * 0.05f;
+					GameObject ball_temp = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+					ball_temp.transform.position = positions_world_one [index_space];
+					ball_temp.transform.localScale = scale_balls * 0.05f;
+					ball_temp.GetComponent<Renderer> ().material.color = Color.red;
 					//ball_temp.transform.RotateAround (cam.transform.position, Vector3.up, 15f);
 					//positions_world_one [index_space] = ball_temp.transform.position;
 					//positions_relative_one [index_space] = cam.transform.InverseTransformPoint (ball_temp.transform.position);
@@ -1264,7 +1270,7 @@ public class control : MonoBehaviour {
 				Debug.Log (index_theta);
 				Debug.Log (text_horizon_study1 [index_theta]);
 				float value_theta = theta_least + index_theta * (theta_most - theta_least) / (num_theta_level - 1);
-				order_move = new int[num_move_level];
+				/*order_move = new int[num_move_level];
 				for (int i = 0; i < order_move.Length; i++) {
 					order_move [i] = i;
 				}
@@ -1275,7 +1281,7 @@ public class control : MonoBehaviour {
 					int tmp = order_move [k];
 					order_move [k] = order_move [n];
 					order_move [n] = tmp;
-				}
+				}*/
 				Debug.Log (ball_target == null);
 				if (reference_now == reference.display)  // in display reference, we create target relative to head, only rotate, log positions_relative_one, results log inverse
 					ball_target.transform.position = head.transform.TransformPoint (positions_relative_one [order_target [num_now_one]]);
@@ -1309,8 +1315,8 @@ public class control : MonoBehaviour {
 			//canvas.text = text_horizon_study1 [order_move [num_move]];
 			appear_move_acquire = state_study1.reset;
 		} else if (appear_move_acquire == state_study1.reset) {
-			positions_body [order_target [num_now_one] * num_move_level*2 + num_move*2] = controller_left.transform.position;
-			rotations_body [order_target [num_now_one] * num_move_level*2 + num_move*2] = controller_left.transform.rotation;
+			//positions_body [order_target [num_now_one] * num_move_level*2 + num_move*2] = controller_left.transform.position;
+			//rotations_body [order_target [num_now_one] * num_move_level*2 + num_move*2] = controller_left.transform.rotation;
 			positions_head [order_target [num_now_one] * num_move_level*2 + num_move*2] = cam.transform.position;
 			rotations_head [order_target [num_now_one] * num_move_level*2 + num_move*2] = cam.transform.rotation;
 			//ball_reset.transform.localScale = scale_balls * 0.2f;
@@ -1329,11 +1335,14 @@ public class control : MonoBehaviour {
 				bool visible_new = false;
 				if (position_v.x > 0 && position_v.x < 1 && position_v.y > 0 && position_v.y < 1 && position_v.z > 0 && position_v.z < 1 && position_v.x + position_v.y + position_v.z >= 1)
 					visible_new = true;
-				orders_move_targets [order_target [num_now_one] * num_move_level + num_move] = order_move [num_move];
+				int delta_move = (order_move [num_move]%12) - order_target [num_now_one];
+				if (delta_move < 0)
+					delta_move += 12;
+				orders_move_targets [order_target [num_now_one] * num_move_level + num_move] = delta_move;//order_move [num_move];
 				positions_result [order_target [num_now_one]*num_move_level+num_move] = position_controller;
 				positions_correct [order_target [num_now_one] * num_move_level + num_move] = positions_world_one [order_target [num_now_one]];
-				positions_body [order_target [num_now_one] * num_move_level*2 + num_move*2+1] = controller_left.transform.position;
-				rotations_body [order_target [num_now_one] * num_move_level*2 + num_move*2+1] = controller_left.transform.rotation;
+				//positions_body [order_target [num_now_one] * num_move_level*2 + num_move*2+1] = controller_left.transform.position;
+				//rotations_body [order_target [num_now_one] * num_move_level*2 + num_move*2+1] = controller_left.transform.rotation;
 				positions_head [order_target [num_now_one] * num_move_level*2 + num_move*2+1] = cam.transform.position;
 				rotations_head [order_target [num_now_one] * num_move_level*2 + num_move*2+1] = cam.transform.rotation;
 				visible_result [order_target [num_now_one] * num_move_level + num_move] = visible_new;
