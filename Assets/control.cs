@@ -41,6 +41,7 @@ public class control : MonoBehaviour {
 
 
 	void Start () {
+		SteamVR.enabled = true;
 		haptic_on = false;
 		cam = GameObject.Find ("Camera (eye)").GetComponent<Camera>();
 		state = m_state.Unstart;
@@ -870,7 +871,7 @@ public class control : MonoBehaviour {
 	private Vector3 position_offset_flags = new Vector3 (0.0f, -1.85f, -0.10f);
 	private float[] angles_move;
 	private Vector3 position_first_head;
-	private int[] order_move = {6,3,5,2,11,9,7,8,10,0,1,4};
+	private int[] order_move = { 6, 8, 11, 10, 1, 0, 2, 3, 5, 4, 7, 9 };
 	private string[] text_horizon_study1 = { "南","南西","西南", "西", "西北", "北西", "北", "北东", "东北", "东", "东南","南东" };
 	private string[] text_vertical_study1 = { "下下", "下", "中", "上", "上上" };
 	private string[] text_move_study1 = { "左左", "左", "右", "右右" };
@@ -900,6 +901,7 @@ public class control : MonoBehaviour {
 	bool timer_on = false;
 	int timer_tick_count;
 	int timer_tick_amount;
+	string text_canvas;
 	
 	private void Initiate_lines()
 	{
@@ -1152,10 +1154,12 @@ public class control : MonoBehaviour {
 					positions_relative_one [index_space] = position_tmp+position_offset;
 					//positions_world_one [index_space] = cam.transform.TransformPoint (position_tmp+position_offset);
 					positions_world_one[index_space] = cam.transform.position+ positions_relative_one[index_space];
+					/*
 					GameObject ball_temp = GameObject.CreatePrimitive (PrimitiveType.Sphere);
 					ball_temp.transform.position = positions_world_one [index_space];
 					ball_temp.transform.localScale = scale_balls * 0.05f;
 					ball_temp.GetComponent<Renderer> ().material.color = Color.red;
+					*/
 					//ball_temp.transform.RotateAround (cam.transform.position, Vector3.up, 15f);
 					//positions_world_one [index_space] = ball_temp.transform.position;
 					//positions_relative_one [index_space] = cam.transform.InverseTransformPoint (ball_temp.transform.position);
@@ -1239,7 +1243,7 @@ public class control : MonoBehaviour {
 		int index_now = order_target [num_now_one];
 		int index_vertical = index_now / num_d_level / num_theta_level;
 		int index_horizon = index_now % num_theta_level;
-		string text_canvas = num_now_one.ToString ();
+		text_canvas = num_now_one.ToString ();
 		text_canvas += "\n" + text_horizon_study1 [index_horizon] + text_vertical_study1 [index_vertical];
 
 		canvas.text = text_canvas;
@@ -1311,7 +1315,7 @@ public class control : MonoBehaviour {
 				move_instruction = "右转" + (move_beta * 30).ToString ();
 			else
 				move_instruction = "左转" + (360 - move_beta * 30).ToString ();
-			canvas.text = move_instruction;
+			canvas.text = text_canvas + "\n" + move_instruction;
 			//canvas.text = text_horizon_study1 [order_move [num_move]];
 			appear_move_acquire = state_study1.reset;
 		} else if (appear_move_acquire == state_study1.reset) {
@@ -1335,7 +1339,7 @@ public class control : MonoBehaviour {
 				bool visible_new = false;
 				if (position_v.x > 0 && position_v.x < 1 && position_v.y > 0 && position_v.y < 1 && position_v.z > 0 && position_v.z < 1 && position_v.x + position_v.y + position_v.z >= 1)
 					visible_new = true;
-				int delta_move = (order_move [num_move]%12) - order_target [num_now_one];
+				int delta_move = order_move [num_move] - (order_target [num_now_one]%12);
 				if (delta_move < 0)
 					delta_move += 12;
 				orders_move_targets [order_target [num_now_one] * num_move_level + num_move] = delta_move;//order_move [num_move];
@@ -1374,7 +1378,7 @@ public class control : MonoBehaviour {
 						move_instruction = "右转" + (move_beta * 30).ToString ();
 					else
 						move_instruction = "左转" + (360 - move_beta * 30).ToString ();
-					canvas.text = move_instruction;
+					canvas.text = text_canvas + "\n" +move_instruction;
 					//canvas.text = text_horizon_study1[order_move[num_move]];
 					appear_move_acquire = state_study1.reset;
 					Show_Text ();
@@ -1394,7 +1398,7 @@ public class control : MonoBehaviour {
 					int index_now = order_target [num_now_one];
 					int index_vertical = index_now / num_theta_level;
 					int index_horizon = index_now % num_theta_level;
-					string text_canvas = num_now_one.ToString ();
+					text_canvas = num_now_one.ToString ();
 					text_canvas += "\n" + text_horizon_study1 [index_horizon] + text_vertical_study1 [index_vertical];
 
 					canvas.text = text_canvas;

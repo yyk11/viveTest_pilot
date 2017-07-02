@@ -5,7 +5,7 @@ import sys
 import os
 import random
 
-file = open("yyk_study2.txt","r")
+file = open("yyk_study2_2.txt","r")
 lines = file.readlines()
 position_target = []
 position_result = []

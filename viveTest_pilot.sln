@@ -1,11 +1,11 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{7804856E-53B1-B4ED-AFDD-8586BE4D0ED5}") = "viveTest_pilot", "Assembly-CSharp-firstpass.csproj", "{500DB9F9-2476-656F-6337-CA6E628DB364}"
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "viveTest_pilot", "Assembly-CSharp-firstpass.csproj", "{500DB9F9-2476-656F-6337-CA6E628DB364}"
 EndProject
-Project("{7804856E-53B1-B4ED-AFDD-8586BE4D0ED5}") = "viveTest_pilot", "Assembly-CSharp.csproj", "{CF7E6515-D7E2-9290-927A-DFD3D0D5A62B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "viveTest_pilot", "Assembly-CSharp.csproj", "{CF7E6515-D7E2-9290-927A-DFD3D0D5A62B}"
 EndProject
-Project("{7804856E-53B1-B4ED-AFDD-8586BE4D0ED5}") = "viveTest_pilot", "Assembly-CSharp-Editor.csproj", "{AA28B336-2A5E-C4F9-BBBA-B4A91FA70E1B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "viveTest_pilot", "Assembly-CSharp-Editor.csproj", "{AA28B336-2A5E-C4F9-BBBA-B4A91FA70E1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
