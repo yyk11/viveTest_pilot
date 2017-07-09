@@ -978,13 +978,13 @@ public class control : MonoBehaviour {
 	private void Show_Text(){
 		
 		if (appear_move_acquire == state_study1.acquire)
-			aim.text = "G";
+			aim.text = "获取";
 		else if (appear_move_acquire == state_study1.appear)
-			aim.text = "A";
+			aim.text = "出现";
 		else if (appear_move_acquire == state_study1.move)
-			aim.text = "M";
+			aim.text = "观察";
 		else
-			aim.text = "C";
+			aim.text = "校准";
 	}
 
 	private void Destroy_Study1Phase2()
@@ -1093,7 +1093,7 @@ public class control : MonoBehaviour {
 			text3d.AddComponent <TextMesh>();
 			//text3d.GetComponent<TextMesh> ().text = text_horizon_study1 [i];
 			text3d.GetComponent<TextMesh> ().text = text_flags [i];
-			text3d.GetComponent<TextMesh> ().color = Color.black;
+			text3d.GetComponent<TextMesh> ().color = Color.red;
 			text3d.GetComponent<TextMesh> ().font = canvas.font;
 			text3d.GetComponent<TextMesh> ().characterSize = 0.2f;
 			text3d.transform.position = cam.transform.position + position_offset + positions_flag[i]/10;

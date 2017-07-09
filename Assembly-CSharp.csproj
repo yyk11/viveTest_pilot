@@ -85,6 +85,7 @@
      <Compile Include="Assets\SteamVR\Scripts\SteamVR_TrackedObject.cs" />
      <Compile Include="Assets\SteamVR\Scripts\SteamVR_UpdatePoses.cs" />
      <Compile Include="Assets\SteamVR\Scripts\SteamVR_Utils.cs" />
+     <Compile Include="Assets\WandController.cs" />
      <Compile Include="Assets\control.cs" />
      <Compile Include="Assets\httpReader.cs" />
      <Compile Include="Assets\visibleTest.cs" />
