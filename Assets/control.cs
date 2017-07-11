@@ -78,11 +78,12 @@ public class control : MonoBehaviour {
 		canvas.text = text_instruction; 
 
 
-
+		state = m_state.Study1_Phase2;
+		Initiate_Study1_Phase2 ();
 		//get body data from the third controller
 		//gameObject.AddComponent<httpReader>();
-		httpserver = gameObject.GetComponent<httpReader>();
-		httpserver.StartServer();
+		//httpserver = gameObject.GetComponent<httpReader>();
+		//httpserver.StartServer();
 	}
 
 	//for showing information to the user
@@ -871,7 +872,7 @@ public class control : MonoBehaviour {
 	private Vector3 position_offset_flags = new Vector3 (0.0f, -1.85f, -0.10f);
 	private float[] angles_move;
 	private Vector3 position_first_head;
-	private int[] order_move = { 6, 8, 11, 10, 1, 0, 2, 3, 5, 4, 7, 9 };
+	private int[] order_move = {6,9,8,11,0,10,7,5,3,4,2,1};
 	private string[] text_horizon_study1 = { "南","南西","西南", "西", "西北", "北西", "北", "北东", "东北", "东", "东南","南东" };
 	private string[] text_vertical_study1 = { "下下", "下", "中", "上", "上上" };
 	private string[] text_move_study1 = { "左左", "左", "右", "右右" };
@@ -2111,7 +2112,7 @@ public class control : MonoBehaviour {
 				canvas.text = "";
 			}
 			if (Input.GetKeyDown (KeyCode.Alpha5)) {
-				distance_far = distance_longest;
+				//distance_far = distance_longest;
 				state = m_state.Study1_Phase2;
 				Initiate_Study1_Phase2 ();
 			}
