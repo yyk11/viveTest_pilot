@@ -14,7 +14,7 @@ public class control : MonoBehaviour {
 	public int dirid;
 	public Color[] colors;
 	public Color color;
-	public enum m_state {Unstart, Putting, Finding, LogMaxsize, VarBallSize, VarDensity, Study_one, ShowBalls, Study1_Phase2,AdjustRange_Angle, Space_acquire, Shelf_Layout, Study2}; // study_one 自由放置， study1phase2 随机位置， adjustrange_angle 肩膀和右臂
+	public enum m_state {Unstart, Putting, Finding, LogMaxsize, VarBallSize, VarDensity, Study_one, ShowBalls, Study1_Phase2,AdjustRange_Angle, Space_acquire, Shelf_Layout, Study2, Study3, pilot_Study3}; // study_one 自由放置， study1phase2 随机位置， adjustrange_angle 肩膀和右臂
 	public m_state state;
 	public GameObject head;
 	public GameObject hand_left;
@@ -78,8 +78,7 @@ public class control : MonoBehaviour {
 		canvas.text = text_instruction; 
 
 
-		state = m_state.Study1_Phase2;
-		Initiate_Study1_Phase2 ();
+
 		//get body data from the third controller
 		//gameObject.AddComponent<httpReader>();
 		//httpserver = gameObject.GetComponent<httpReader>();
@@ -872,7 +871,7 @@ public class control : MonoBehaviour {
 	private Vector3 position_offset_flags = new Vector3 (0.0f, -1.85f, -0.10f);
 	private float[] angles_move;
 	private Vector3 position_first_head;
-	private int[] order_move = {6,9,8,11,0,10,7,5,3,4,2,1};
+	private int[] order_move = { 6, 8, 11, 10, 1, 0, 2, 3, 5, 4, 7, 9 };
 	private string[] text_horizon_study1 = { "南","南西","西南", "西", "西北", "北西", "北", "北东", "东北", "东", "东南","南东" };
 	private string[] text_vertical_study1 = { "下下", "下", "中", "上", "上上" };
 	private string[] text_move_study1 = { "左左", "左", "右", "右右" };
@@ -1781,7 +1780,219 @@ public class control : MonoBehaviour {
 		}
 	}
 
-	void Update () {
+    // pilot study for study3, press 'P' to start, press 'R' to logdata
+    private int num_ball_pilot = 30;
+    private int num_now_pilot = -1;
+    private List<Vector3> positions_ball_pilot;
+    private List<GameObject> balls_pilot;
+    private List<GameObject> text3ds_pilot;
+    private Quaternion rotation_texts;
+    void CreateBall_pilot()
+    {
+        num_now_pilot++;
+        GameObject text3d = new GameObject();
+        text3d.AddComponent<TextMesh>();
+        text3d.GetComponent<TextMesh>().text = num_now_pilot.ToString();
+        text3d.GetComponent<TextMesh>().color = Color.black;
+        text3d.GetComponent<TextMesh>().font = canvas.font;
+        text3d.GetComponent<TextMesh>().characterSize = 0.05f;
+        text3d.transform.position = position_text_offset;
+        text3d.transform.rotation = rotation_texts;
+        text3ds_pilot.Add(text3d);
+        balls_pilot.Add(GameObject.CreatePrimitive(PrimitiveType.Sphere));
+        balls_pilot[num_now_pilot].name = num_now_pilot.ToString();
+        balls_pilot[num_now_pilot].transform.position = position_show;
+        balls_pilot[num_now_pilot].transform.localScale = scale_balls * 0.8f;
+        balls_pilot[num_now_pilot].AddComponent<Rigidbody>();
+        balls_pilot[num_now_pilot].GetComponent<Rigidbody>().useGravity = false;
+        balls_pilot[num_now_pilot].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        Color color_new;
+        if (num_now_pilot < color_ball_study1.Length)
+            color_new = color_ball_study1[num_now_pilot];
+        else
+            color_new = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
+        balls_pilot[num_now_pilot].GetComponent<Renderer>().material.color = color_new;
+        text3ds_pilot[num_now_pilot].transform.SetParent(balls_pilot[num_now_pilot].transform);
+    }
+
+    void InitiatePilot_Study3()
+    {
+        Debug.Log("pilot");
+        rotation_texts = cam.transform.rotation;
+        text3ds_pilot = new List<GameObject>();
+        balls_pilot = new List<GameObject>();
+		position_show = head.transform.TransformPoint (new Vector3(0,0,0.5f));
+		position_text_offset = head.transform.TransformPoint (new Vector3(-0.02f,0.05f,0.47f));
+        CreateBall_pilot();
+    }
+
+    public void TriggerPilot_Stduy3(GameObject colliding, GameObject mycontroller, Vector3 position_controller)
+    {
+		//Debug.Log ("trigger_pilot");
+        if ( colliding != null)
+        {
+            colliding.transform.position = mycontroller.transform.position;
+            colliding.transform.SetParent(mycontroller.transform);
+        }
+    }
+    public void ReleasePilot_Study3(GameObject objInHand)
+    {
+		Debug.Log ("release");
+        objInHand.transform.SetParent(null);
+        if(num_now_pilot < num_ball_pilot - 1 && objInHand.name == num_now_pilot.ToString())
+        {
+            CreateBall_pilot();
+        }
+    }
+    // the third study
+    private GameObject[] balls_study3;
+    private int num_study3 = 10;
+    private Vector3[] positions_study3;
+    private Color[] colors_study3 ={ Color.red, (Color.red + Color.yellow)/2, Color.yellow, Color.green, (Color.green + Color.blue)/2, Color.blue, Color.magenta, Color.black, Color.gray, Color.white };
+    private Vector3 scale_study3 = new Vector3(0.05f, 0.05f, 0.05f);
+    private float[] time_tasks;
+    private Vector3[] positions_attempts;
+    private Vector3[] positions_correct_study3;
+    private int round_task = 5;
+    private int round_now;
+    private int task_now;
+    private int[] order_study3;
+    private int[] order_result;
+    private bool start_end;
+    private DateTime time_start;
+    private DateTime time_end;
+    private string[] text_balls = { "红", "橙", "黄", "绿", "青", "蓝", "紫", "黑", "灰", "白" };
+    private GameObject textSecondTask;
+    private int tick_now;
+    private int tick_threthold;
+    private char character_now;
+    private char character_answer;
+    List<int> result_SecondTask;
+    void InitiateSecondTask()
+    {
+        result_SecondTask = new List<int>();
+        character_answer = 'a';
+        tick_now = 0;
+        tick_threthold = 100;
+        textSecondTask = new GameObject();
+        textSecondTask.AddComponent<TextMesh>();
+        char character = (char)('a' + UnityEngine.Random.Range(0, 26));
+        character_now = character;
+        textSecondTask.GetComponent<TextMesh>().text = character.ToString();
+        textSecondTask.GetComponent<TextMesh>().color = Color.black;
+        textSecondTask.GetComponent<TextMesh>().font = canvas.font;
+        textSecondTask.GetComponent<TextMesh>().characterSize = 0.2f;
+        textSecondTask.transform.position = cam.transform.position + new Vector3(0, 0, 5);
+        textSecondTask.transform.rotation = cam.transform.rotation;
+    }
+    public void CheckSecondTask()
+    {
+		int now = result_SecondTask.ToArray().Length;
+        if (character_now == character_answer)
+        {
+            
+            result_SecondTask[now - 1] = 1;
+        }
+        else
+        {
+			result_SecondTask[now-1] = -1;
+        }
+
+    }
+
+    void InitialPosition_Study3()
+    {
+		positions_study3 = new Vector3[num_study3];
+		for (int i = 0; i < num_study3; i++) {
+			positions_study3 [i] = new Vector3 (i, i, i);
+		}
+    }
+    void InitialBall_Study3()
+    {
+        balls_study3 = new GameObject[num_study3];
+        for(int i = 0;i < num_study3;i++)
+        {
+            balls_study3[i] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            balls_study3[i].transform.position = positions_study3[i];
+            balls_study3[i].transform.localScale = scale_study3;
+            balls_study3[i].GetComponent<Renderer>().material.color = colors_study3[i];
+        }
+    }
+    void InitialPara_Study3()
+    {
+        positions_attempts = new Vector3[num_study3 * round_task];
+        positions_correct_study3 = new Vector3[num_study3 * round_task];
+        order_result = new int[num_study3 * round_task];
+        time_tasks = new float[num_study3 * round_task];
+        order_study3 = new int[num_study3];
+        for (int i = 0; i < num_study3; i++)
+            order_study3[i] = i;
+        int n = num_study3;
+        while(n > 1)
+        {
+            n--;
+            int t = UnityEngine.Random.Range(0, n);
+            int temp = order_study3[n];
+            order_study3[n] = order_study3[t];
+            order_study3[t] = temp; 
+        }
+        round_now = 0;
+        task_now = 0;
+        start_end = false;
+        canvas.text = text_balls[order_study3[task_now]];
+    }
+    void InitialStudy3()
+    {
+        InitialPosition_Study3();
+        InitialBall_Study3();
+        InitialPara_Study3();
+        InitiateSecondTask();
+    }
+    public void TriggerStudy3(GameObject colliding, GameObject mycontroller, Vector3 position_controller)
+    {
+        if(start_end == false)
+        {
+            time_start = DateTime.Now;
+            start_end = true;
+        }
+        else
+        {
+            start_end = false;
+            time_end = DateTime.Now;
+            time_tasks[round_now * num_study3 + task_now] = Convert.ToSingle(time_end.Subtract(time_start).TotalSeconds);
+            positions_attempts[round_now * num_study3 + task_now] = position_controller;
+            positions_correct_study3[round_now * num_study3 + task_now] = positions_study3[order_study3[task_now]];
+            order_result[round_now * num_study3 + task_now] = order_study3[task_now];
+            task_now++;
+            if(task_now >= num_study3)
+            {
+                round_now++;
+                if(round_now >= round_task)
+                {
+                    canvas.text = "Done.Thank you!";
+                    dataget.log_study3("study3", positions_attempts, positions_correct_study3, order_result, result_SecondTask.ToArray());
+                    state = m_state.Unstart;
+                    return;
+                }
+                task_now = 0;
+                for (int i = 0; i < num_study3; i++)
+                    order_study3[i] = i;
+                int n = num_study3;
+                while (n > 1)
+                {
+                    n--;
+                    int t = UnityEngine.Random.Range(0, n);
+                    int temp = order_study3[n];
+                    order_study3[n] = order_study3[t];
+                    order_study3[t] = temp;
+                }
+            }
+            canvas.text = text_balls[order_study3[task_now]];
+        }
+    }
+
+
+    void Update () {
 		switch(state){
 		case m_state.Unstart:
 			if (Input.GetKey (KeyCode.Space)) {
@@ -1798,6 +2009,17 @@ public class control : MonoBehaviour {
 				state = m_state.Putting;
 				ShowaBall ();
 			}
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                    state = m_state.Study3;
+                    InitialStudy3();
+            }
+                if (Input.GetKeyDown(KeyCode.P))
+                {
+                    Debug.Log("pilot");
+                    state = m_state.pilot_Study3;
+                    InitiatePilot_Study3();
+                }
 			if (Input.GetKey (KeyCode.Alpha1)) {
 				Debug.Log ("1");
 				dirid = -1;
@@ -2117,6 +2339,34 @@ public class control : MonoBehaviour {
 				Initiate_Study1_Phase2 ();
 			}
 			break;
+            case m_state.pilot_Study3:
+                if(Input.GetKeyDown(KeyCode.R))
+                {
+                    Debug.Log("log_pilot");
+                    if (balls_pilot.Count > 1)
+                    {
+                        Vector3[] position_tostore = new Vector3[balls_pilot.Count - 1];
+                        for (int i = 0; i < balls_pilot.Count - 1; i++)
+                            position_tostore[i] = cam.transform.InverseTransformPoint(balls_pilot[i].transform.position);
+                        dataget.logData_space ("study3", position_tostore);
+                    }
+                }
+                break;
+            case m_state.Study3:
+                tick_now++;
+                if (tick_now >= tick_threthold)
+                {
+                    tick_now = 0;
+                    char character = (char)('a' + UnityEngine.Random.Range(0, 26));
+                    textSecondTask.GetComponent<TextMesh>().text = character.ToString();
+                    character_now = character;
+				if (character_now == character_answer) {
+					result_SecondTask.Add (0);
+				} else {
+					result_SecondTask.Add (2);
+				}
+                }
+                break;
 		case m_state.Space_acquire:
 			if (Input.GetKeyDown (KeyCode.D)) {
 				reference_now = reference.display;

@@ -168,11 +168,11 @@ public class DataGet : MonoBehaviour {
 			fstream.Write (rotations_body [i].x + " " + rotations_body [i].y + " " + rotations_body [i].z + " " + rotations_body[i].w + " \r\n");
 		}
 		fstream.Write ("head positions:\r\n");
-		for (int i = 0; i < positions_result.Length; i++) {
+		for (int i = 0; i < positions_head.Length; i++) {
 			fstream.Write (positions_head [i].x + " " + positions_head [i].y + " " + positions_head [i].z + " " + "\r\n");
 		}
 		fstream.Write ("head rotations:\r\n");
-		for (int i = 0; i < positions_result.Length; i++) {
+		for (int i = 0; i < positions_head.Length; i++) {
 			fstream.Write (rotations_head [i].x + " " + rotations_head [i].y + " " + rotations_head [i].z + " " + rotations_head[i].w + " \r\n");
 		}
 		fstream.Write ("move orders:\r\n");
@@ -224,6 +224,38 @@ public class DataGet : MonoBehaviour {
 		}
 		fstream.Close ();
 	}
+    public void log_study3(string foldname, Vector3[] position_p, Vector3[] position_c, int[] order, int[] result_s)
+    {
+        Debug.Log("log study3");
+        tmpdir = dir + foldname + '/';
+        total = int.Parse(System.IO.File.ReadAllText(tmpdir + "total.txt")) + 1;
+        System.IO.File.WriteAllText(tmpdir + "total.txt", total.ToString());
+        if (fstream != null)
+            fstream.Close();
+        file = new FileStream(tmpdir + total.ToString() + ".txt", FileMode.Append);
+        fstream = new StreamWriter(file);
+        fstream.WriteLine("points:");
+        for (int i = 0;i < position_p.Length;i++)
+        {
+            fstream.WriteLine(position_p[i].x.ToString() + " " + position_p[i].y.ToString() + " " + position_p[i].z.ToString());
+        }
+        fstream.WriteLine("correct:");
+        for (int i = 0; i < position_c.Length; i++)
+        {
+            fstream.WriteLine(position_c[i].x.ToString() + " " + position_c[i].y.ToString() + " " + position_c[i].z.ToString() );
+        }
+        fstream.WriteLine("order:");
+        for(int i = 0;i < order.Length;i++)
+        {
+            fstream.WriteLine(order[i].ToString());
+        }
+        fstream.WriteLine("second:");
+        for (int i = 0; i < result_s.Length; i++)
+        {
+            fstream.WriteLine(result_s[i].ToString());
+        }
+        fstream.Close();
+    }
 	// Update is called once per frame
 	void Update () {
 		/*if (Input.GetKey (KeyCode.Return)) {
